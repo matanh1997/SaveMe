@@ -1,6 +1,6 @@
 from flask import Flask, request
 import speech_recognition as sr
-r=sr.Recognizer()
+r = sr.Recognizer()
 app = Flask(__name__)
 
 SAVE_PATH = 'C:/Users/Matan/SaveMe/harvard.wav'
