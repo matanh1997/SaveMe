@@ -1,4 +1,4 @@
-#!/bin/python
+#!/bin/python3
 from flask import Flask, request
 app = Flask(__name__)
 import speech_recognition as sr
