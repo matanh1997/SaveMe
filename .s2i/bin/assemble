@@ -1,1 +1,5 @@
-chmod +x /opt/app-root/src/main.py
+#!/bin/bash
+echo "Running stock build:"
+${STI_SCRIPTS_PATH}/assemble
+echo "Fixing the mess:"
+chmod 755 /opt/app-root/src/main.py
