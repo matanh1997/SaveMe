@@ -1,15 +1,16 @@
 from flask import Flask, request
-
+import speech_recognition as sr
+r=sr.Recognizer()
 app = Flask(__name__)
 
-SAVE_PATH = 'C:\\Users\\Matan\\Desktop\\SaveMe\\harvard.wav'
+SAVE_PATH = 'C:/Users/Matan/SaveMe/harvard.wav'
 RECORDING_DICT = {
     'CURR_RECORDING': [],
     'NUM_RECORDING': 0
 }
 
-FIRST_SAFE_WORD = 'fluffy'
-SECOND_SAFE_WORD = 'cats'
+FIRST_SAFE_WORD = 'beer'
+SECOND_SAFE_WORD = 'heat'
 
 
 @app.route('/audio', methods=['GET', 'POST'])
@@ -26,13 +27,14 @@ def get_audio_file():
             text: str = translate_audio_to_text(audio)
             RECORDING_DICT['CURR_RECORDING'].append(text.split(' '))
             RECORDING_DICT['NUM_RECORDING'] += 1
+            check_recording_for_sequence()
             if RECORDING_DICT['NUM_RECORDING'] >= 2:
-                if RECORDING_DICT['SHOULD_PING']:
+                if 'SHOULD_PING' in RECORDING_DICT:
                     return {
                                'message': 'emergency',
                                'action': 'emualate call'
                            }, 200
-
+        print(RECORDING_DICT['CURR_RECORDING'][0])
         return {'message': 'test'}, 200
 
 
